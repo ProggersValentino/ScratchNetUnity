@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ServerObject: {fileID: 7754848786912604719, guid: d3ef0d49015368b4c9df6cba5c2ec89d, type: 3}
-  ClientObject: {fileID: 3256809825669063056, guid: 059f5f6242c4c4f498472e383242a199, type: 3}
+  ClientObject: {fileID: 3765631127305727354, guid: ad6b7ba21d32c9a44877d3b0554b1a06, type: 3}
 --- !u!4 &2013959491
 Transform:
   m_ObjectHideFlags: 0

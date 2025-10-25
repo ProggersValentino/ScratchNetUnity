@@ -6,7 +6,7 @@ public class ScratchNetPlayer : MonoBehaviour
     public PlayerInput playerMap;
     InputAction moveAction;
 
-    public ScratchClient clientObject;
+    public ScratchClient clientObject { get; set; }
 
     [SerializeField] private float pSpeed = 15.0f;
 
@@ -21,6 +21,7 @@ public class ScratchNetPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (clientObject == null) return;
 
         TryToUpdatePosition(); //check to see if our baseline snapshot updated and move to that location
 
@@ -60,5 +61,10 @@ public class ScratchNetPlayer : MonoBehaviour
         Vector3 extractedPos = new Vector3(posX, posY, posZ);
 
         return extractedPos;
+    }
+
+    public void Init(ScratchClient client)
+    {
+        clientObject = client;
     }
 }

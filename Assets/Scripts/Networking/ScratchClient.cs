@@ -28,25 +28,45 @@ public static class NativeClientPlugin
     [DllImport("ClientLibrary.dll")]
     public static extern float RetrieveBaselinePacketPosZ(IntPtr client);
 
+    [DllImport("ClientLibrary.dll")]
+    public static extern IntPtr ExtractNOM(IntPtr client);
+
+
 }
 
 public class ScratchClient : MonoBehaviour
 {
 
     public IntPtr ClientObject { get; private set; }
+    public IntPtr nom { get; private set; }
+
+    ScratchNetObjectManager objManager;
+
     int ObjectID;
+
+    public GameObject playerPref;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ClientObject = NativeClientPlugin.InitializeClient();
 
+        nom = NativeClientPlugin.ExtractNOM(ClientObject);
+
         NativeClientPlugin.BeginClientProcess(ClientObject); //start running the threads 
 
         ObjectID = NativeClientPlugin.GetObjectID(ClientObject);
 
         Debug.LogWarning($"Client Ptr Value: {ClientObject.ToString()}");
+        Debug.LogWarning($"Network Object Management Ptr Value: {nom.ToString()}");
         Debug.LogWarning(ObjectID.ToString());
+        
+
+        //init network object manager
+        objManager = GetComponent<ScratchNetObjectManager>();
+        objManager.Init(nom);
+
+        SpawnPlayer();
     }
 
     public void QueueNewPositionToClient(Vector3 newPos)
@@ -58,5 +78,19 @@ public class ScratchClient : MonoBehaviour
     {
         Debug.Log("Cleaning up client...");
         NativeClientPlugin.CleanupClient(ClientObject); //to ensure we safely eliminate any active threads 
+    }
+
+    void SpawnPlayer()
+    {
+        float pox = NativeClientPlugin.RetrieveBaselinePacketPosX(ClientObject);
+        float poy = NativeClientPlugin.RetrieveBaselinePacketPosY(ClientObject);
+        float poz = NativeClientPlugin.RetrieveBaselinePacketPosZ(ClientObject);
+
+        Vector3 startingPos = new Vector3(pox, poy, poz); 
+
+        GameObject player = Instantiate(playerPref, startingPos, Quaternion.identity);
+
+        ScratchNetPlayer playerComp = player.GetComponent<ScratchNetPlayer>();
+        playerComp.Init(this);
     }
 }
