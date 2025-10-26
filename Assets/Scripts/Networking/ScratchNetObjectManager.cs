@@ -80,12 +80,14 @@ public class ScratchNetObjectManager : MonoBehaviour
 
         GameObject newNetObject = Instantiate(networkObjectPref, pos, Quaternion.identity); //spawn the object at the position extracted from 
 
-        ScratchNetworkObject networkComp = GetComponent<ScratchNetworkObject>();
+        ScratchNetworkObject networkComp = newNetObject.GetComponent<ScratchNetworkObject>();
 
         //line below needs to happen before init otherwise it doesnt get called 
         NativeNetObjectManagePlugin.CompleteSpawnRequest(nom); //pop the request from the queue
 
-        networkComp.Init(objectRequestedToSpawn);
+        //networkComp.Init(objectRequestedToSpawn);
+        networkComp.scratchNetObject = objectRequestedToSpawn;
+        networkComp.objectID = NativeScratchNetworkObjPlugin.GetSNObjectID(objectRequestedToSpawn);
 
         Debug.Log("Created object now cleaning up");
 

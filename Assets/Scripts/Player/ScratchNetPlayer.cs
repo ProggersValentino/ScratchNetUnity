@@ -16,6 +16,7 @@ public class ScratchNetPlayer : MonoBehaviour
     void Start()
     {
         moveAction = playerMap.actions.FindAction("Move");
+        TryToUpdatePosition();
     }
 
     // Update is called once per frame

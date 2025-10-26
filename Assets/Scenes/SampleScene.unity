@@ -1494,6 +1494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerObject: {fileID: 7754848786912604719, guid: d3ef0d49015368b4c9df6cba5c2ec89d, type: 3}
   ClientObject: {fileID: 3765631127305727354, guid: ad6b7ba21d32c9a44877d3b0554b1a06, type: 3}
+  ObjectManagement: {fileID: 3322769680344404278, guid: bc17ca513a5302f4281a72663d47bc2e, type: 3}
 --- !u!4 &2013959491
 Transform:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ Transform:
   m_GameObject: {fileID: 2013959489}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.44657934, y: 10.00341, z: -22.131329}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

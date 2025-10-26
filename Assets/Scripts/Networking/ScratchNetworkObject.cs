@@ -15,19 +15,24 @@ public static class NativeScratchNetworkObjPlugin
 public class ScratchNetworkObject : MonoBehaviour
 {
     //the ptr to the scratchnetobject will be used to poll positonal updates to the client for it send to sever
-    IntPtr scratchNetObject;
+    public IntPtr scratchNetObject;
 
-    int objectID;
+    public int objectID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        TryToUpdatePosition();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(scratchNetObject == IntPtr.Zero || scratchNetObject == null)
+        {
+            return;
+        }
+
         TryToUpdatePosition();
     }
 
@@ -48,7 +53,7 @@ public class ScratchNetworkObject : MonoBehaviour
             return;
         }
 
-        Vector3 newPosition = BuildPositionalData(scratchNetObject);
+        Vector3 newPosition = BuildPositionalData(SNOSnapshot);
 
         gameObject.transform.position = newPosition; //set new position
 

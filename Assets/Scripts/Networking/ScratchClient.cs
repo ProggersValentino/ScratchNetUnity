@@ -46,12 +46,18 @@ public class ScratchClient : MonoBehaviour
 
     public GameObject playerPref;
 
+    private void Awake()
+    {
+        ClientObject = NativeClientPlugin.InitializeClient();
+        nom = NativeClientPlugin.ExtractNOM(ClientObject);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ClientObject = NativeClientPlugin.InitializeClient();
+        
 
-        nom = NativeClientPlugin.ExtractNOM(ClientObject);
+      
 
         NativeClientPlugin.BeginClientProcess(ClientObject); //start running the threads 
 
@@ -62,9 +68,9 @@ public class ScratchClient : MonoBehaviour
         Debug.LogWarning(ObjectID.ToString());
         
 
-        //init network object manager
+        /*//init network object manager
         objManager = GetComponent<ScratchNetObjectManager>();
-        objManager.Init(nom);
+        objManager.Init(nom);*/
 
         SpawnPlayer();
     }
