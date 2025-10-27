@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMap: {fileID: 4463292826074152512}
-  clientObject: {fileID: 0}
   pSpeed: 20
 --- !u!114 &4463292826074152512
 MonoBehaviour:

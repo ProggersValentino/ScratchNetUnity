@@ -31,6 +31,24 @@ public static class NativeClientPlugin
     [DllImport("ClientLibrary.dll")]
     public static extern IntPtr ExtractNOM(IntPtr client);
 
+    [DllImport("ClientLibrary.dll")]
+    public static extern bool CanPacketBeQueuedToSend(IntPtr client);
+
+    [DllImport("ClientLibrary.dll")]
+    public static extern IntPtr ExtractSnapshotFromIndex(IntPtr client, int index);
+
+    [DllImport("ClientLibrary.dll")]
+    public static extern int FindRecordIndex(IntPtr client, IntPtr recordToLookFor);
+
+    [DllImport("ClientLibrary.dll")]
+    public static extern float RetrievePacketPosX(IntPtr chosenSnapshot);
+
+    [DllImport("ClientLibrary.dll")]
+    public static extern float RetrievePacketPosY(IntPtr chosenSnapshot);
+
+    [DllImport("ClientLibrary.dll")]
+    public static extern float RetrievePacketPosZ(IntPtr chosenSnapshot);
+
 
 }
 
@@ -77,6 +95,13 @@ public class ScratchClient : MonoBehaviour
 
     public void QueueNewPositionToClient(Vector3 newPos)
     {
+        bool canSendRequest = NativeClientPlugin.CanPacketBeQueuedToSend(ClientObject);
+        //ensure we're in sync with the send rate of the packets & to ensure we're not bombarding the request pool with a hundreds of packets 
+        if (!canSendRequest)
+        {
+            return;
+        }
+
         NativeClientPlugin.QueuePositionToClient(ClientObject, ObjectID, newPos.x, newPos.y, newPos.z);
     }
 
