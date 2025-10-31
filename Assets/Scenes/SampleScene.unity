@@ -1495,6 +1495,7 @@ MonoBehaviour:
   ServerObject: {fileID: 7754848786912604719, guid: d3ef0d49015368b4c9df6cba5c2ec89d, type: 3}
   ClientObject: {fileID: 3765631127305727354, guid: ad6b7ba21d32c9a44877d3b0554b1a06, type: 3}
   ObjectManagement: {fileID: 3322769680344404278, guid: bc17ca513a5302f4281a72663d47bc2e, type: 3}
+  packetSendRate: 10
 --- !u!4 &2013959491
 Transform:
   m_ObjectHideFlags: 0

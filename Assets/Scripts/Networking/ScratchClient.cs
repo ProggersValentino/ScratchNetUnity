@@ -49,6 +49,9 @@ public static class NativeClientPlugin
     [DllImport("ClientLibrary.dll")]
     public static extern float RetrievePacketPosZ(IntPtr chosenSnapshot);
 
+    [DllImport("ClientLibrary.dll")]
+    public static extern void SetPacketSendRate(IntPtr client, int rate);
+
 
 }
 
@@ -64,18 +67,22 @@ public class ScratchClient : MonoBehaviour
 
     public GameObject playerPref;
 
+    [SerializeField] private int packetSendRate;
+
     private void Awake()
     {
         ClientObject = NativeClientPlugin.InitializeClient();
         nom = NativeClientPlugin.ExtractNOM(ClientObject);
+
+       
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
 
-      
+        NativeClientPlugin.SetPacketSendRate(ClientObject, packetSendRate);
+
 
         NativeClientPlugin.BeginClientProcess(ClientObject); //start running the threads 
 
@@ -123,5 +130,10 @@ public class ScratchClient : MonoBehaviour
 
         ScratchNetPlayer playerComp = player.GetComponent<ScratchNetPlayer>();
         playerComp.Init(this);
+    }
+
+    public void InitClientSettings(int sendRate)
+    {
+        packetSendRate = sendRate;
     }
 }

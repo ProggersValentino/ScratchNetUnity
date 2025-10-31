@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class NetworkManager : MonoBehaviour
     public GameObject ServerObject;
     public GameObject ClientObject;
     public GameObject ObjectManagement;
+
+    [SerializeField] private int packetSendRate; //how many packets do we want the client and server sending per second
 
     private void Awake()
     {
@@ -36,9 +39,13 @@ public class NetworkManager : MonoBehaviour
 
     public void Host()
     {
-        Instantiate(ServerObject, Vector3.zero, Quaternion.identity);
+        GameObject serverObj = Instantiate(ServerObject, Vector3.zero, Quaternion.identity);
+        ScratchServer server = serverObj.GetComponent<ScratchServer>();
+        server.InitServerSettings(packetSendRate);
+
         GameObject clientObject = Instantiate(ClientObject, Vector3.zero, Quaternion.identity);
         ScratchClient client = clientObject.GetComponent<ScratchClient>();
+        client.InitClientSettings(packetSendRate);
 
         InitObjectManagement(client);
     }
@@ -47,6 +54,7 @@ public class NetworkManager : MonoBehaviour
     {
         GameObject clientObject = Instantiate(ClientObject, Vector3.zero, Quaternion.identity);
         ScratchClient client = clientObject.GetComponent<ScratchClient>();
+        client.InitClientSettings(packetSendRate);
 
         InitObjectManagement(client);
     }
