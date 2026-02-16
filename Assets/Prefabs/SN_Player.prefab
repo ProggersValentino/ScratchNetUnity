@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMap: {fileID: 4463292826074152512}
-  pSpeed: 20
+  pSpeed: 100
 --- !u!114 &4463292826074152512
 MonoBehaviour:
   m_ObjectHideFlags: 0
