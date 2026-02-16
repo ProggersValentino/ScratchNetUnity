@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.scratchingrust.scratchnet": {
+      "version": "https://github.com/ProggersValentino/ScratchNetUnityPackage.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5baee0df1dc4ae2f1efd5d0a72214c916dfa70df"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.6",
       "depth": 0,
